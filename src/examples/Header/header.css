@@ -1,0 +1,115 @@
+/* .mega-header {
+  position: relative;
+  background: #fff;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.menu-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.menu-item {
+  position: relative;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.mega-dropdown {
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  background: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  z-index: 1000;
+  padding: 1rem;
+  width: 100%;
+}
+
+.mega-grid {
+  display: flex;
+  gap: 3rem;
+}
+
+.mega-list a {
+  display: block;
+  padding: 0.3rem 0;
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+
+.mega-images a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 1rem;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+}
+
+.mega-images img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 0 0.5rem;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+}
+
+/* Mobile */
+.mobile-menu {
+  display: none;
+}
+
+.drawer-content {
+  padding: 1rem;
+}
+
+.drawer-content h4 {
+  margin: 1rem 0 0.5rem;
+}
+
+.drawer-content ul {
+  list-style: none;
+  padding-left: 1rem;
+}
+
+@media (max-width: 768px) {
+  .menu-bar {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+}
+*/
+/* header.css */
+a {
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: #8642d9;
+  transform: translateX(4px);
+}

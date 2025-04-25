@@ -1,0 +1,104 @@
+.amazon-header {
+  font-family: Arial, sans-serif;
+}
+
+/* Top Navbar */
+.top-nav {
+  background-color: #131921;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  gap: 15px;
+}
+
+.logo {
+  color: orange;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.location small {
+  display: block;
+  color: lightgray;
+  font-size: 11px;
+}
+
+.search-bar {
+  display: flex;
+  flex: 1;
+  max-width: 500px;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.search-bar select,
+.search-bar input {
+  padding: 8px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.search-bar select {
+  background: #f3f3f3;
+}
+
+.search-bar button {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+.account small,
+.orders small {
+  color: lightgray;
+  font-size: 11px;
+}
+
+.cart {
+  position: relative;
+  font-weight: bold;
+}
+
+.cart-count {
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  background: orange;
+  color: black;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 10px;
+}
+
+/* Bottom Navbar */
+.bottom-nav {
+  background-color: #232f3e;
+  color: white;
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.menu {
+  font-weight: bold;
+}
+
+/* Pink Banner */
+.banner {
+  background-color: #e5a6da;
+  text-align: center;
+  padding: 20px;
+  font-size: 22px;
+}
+
+.banner .joy {
+  font-weight: bold;
+  font-size: 28px;
+  font-style: italic;
+}
