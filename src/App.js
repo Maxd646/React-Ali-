@@ -1,6 +1,8 @@
 import { useState, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import "./app.css";
+import "./index.css";
+
 // React Router
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 

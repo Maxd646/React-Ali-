@@ -11,7 +11,7 @@ import team3 from "assets/images/cpp3.jpg";
 import team4 from "assets/images/cpp4.jpg";
 import team5 from "assets/images/cpp5.jpg";
 import team9 from "assets/images/team-1.jpg";
-import Footer2 from "examples/Footer2";
+import Footer1 from "examples/Footer2";
 
 const productCategories = [
   {
@@ -124,7 +124,7 @@ function Home() {
       <DashboardLayout>
         <DashboardNavbar />
         <MDBox py={3} px={2} sx={{ bgcolor: "#e0f7fa", minHeight: "100vh" }}>
-          <Grid container spacing={4}>
+          <Grid container spacing={3}>
             {productCategories.map((category, index) => (
               <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
                 <Card
@@ -164,7 +164,7 @@ function Home() {
           </Grid>
         </MDBox>
       </DashboardLayout>
-      <Footer2 />
+      <Footer1 />
     </>
   );
 }
