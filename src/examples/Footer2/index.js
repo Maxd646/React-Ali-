@@ -1,134 +1,265 @@
 import React from "react";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { FaUserPlus, FaFileAlt, FaBell } from "react-icons/fa";
+import { Box, Container, Grid, Typography, Link, IconButton, Divider } from "@mui/material";
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  LinkedIn,
+  YouTube,
+  Email,
+  Phone,
+  LocationOn,
+  Payment,
+  LocalShipping,
+  Security,
+  Support,
+} from "@mui/icons-material";
 
-const Section = () => {
+const Footer2 = () => {
+  const footerSections = [
+    {
+      title: "Shop by Category",
+      links: [
+        { name: "Electronics", href: "/billing" },
+        { name: "Fashion", href: "/profile" },
+        { name: "Food & Beverages", href: "/billing" },
+        { name: "Books & Academic", href: "/notifications" },
+        { name: "Health & Beauty", href: "/notifications" },
+        { name: "Home & Furniture", href: "/rtl" },
+      ],
+    },
+    {
+      title: "Customer Service",
+      links: [
+        { name: "Contact Us", href: "#" },
+        { name: "Shipping Info", href: "#" },
+        { name: "Returns & Exchanges", href: "#" },
+        { name: "Size Guide", href: "#" },
+        { name: "FAQ", href: "#" },
+        { name: "Track Order", href: "#" },
+      ],
+    },
+    {
+      title: "About Ali Fennix",
+      links: [
+        { name: "Our Story", href: "#" },
+        { name: "Careers", href: "#" },
+        { name: "Press", href: "#" },
+        { name: "Blog", href: "#" },
+        { name: "Sustainability", href: "#" },
+        { name: "Privacy Policy", href: "#" },
+      ],
+    },
+  ];
+
+  const features = [
+    {
+      icon: <LocalShipping sx={{ fontSize: 32 }} />,
+      title: "Free Shipping",
+      description: "On orders over $50",
+    },
+    {
+      icon: <Security sx={{ fontSize: 32 }} />,
+      title: "Secure Payment",
+      description: "100% secure checkout",
+    },
+    {
+      icon: <Support sx={{ fontSize: 32 }} />,
+      title: "24/7 Support",
+      description: "Dedicated support",
+    },
+    {
+      icon: <Payment sx={{ fontSize: 32 }} />,
+      title: "Easy Returns",
+      description: "30 day return policy",
+    },
+  ];
+
   return (
-    <div className="w-full">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-green-300 via-blue-300 to-purple-300 py-20 px-6 md:px-20 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
-          Discover Amen Investment Group
-        </h1>
-        <p className="text-lg md:text-xl text-gray-600 mb-8">
-          Unlock Your Career Potential With Us
-        </p>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-semibold transition">
-          Find Jobs
-        </button>
-      </div>
+    <Box
+      sx={{
+        bgcolor: "#1a1a2e",
+        color: "white",
+        pt: 6,
+        pb: 3,
+      }}
+    >
+      {/* Features Section */}
+      <Box sx={{ bgcolor: "#16213e", py: 4 }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={3}>
+            {features.map((feature, index) => (
+              <Grid item xs={6} md={3} key={index}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    textAlign: "center",
+                    p: 2,
+                  }}
+                >
+                  <Box sx={{ color: "#f7b801", mb: 1 }}>{feature.icon}</Box>
+                  <Typography variant="h6" sx={{ mb: 0.5, fontWeight: "bold" }}>
+                    {feature.title}
+                  </Typography>
+                  <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                    {feature.description}
+                  </Typography>
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
 
-      {/* Trusted By Section */}
-      <div className="py-12 px-6 md:px-20 bg-white">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">Trusted By</h2>
-        <div className="flex flex-wrap items-center justify-center gap-8">
-          <img src="/images/logo1.png" className="h-12" alt="logo1" />
-          <img src="/images/logo2.png" className="h-12" alt="logo2" />
-          <img src="/images/logo3.png" className="h-12" alt="logo3" />
-          <img src="/images/logo4.png" className="h-12" alt="logo4" />
-        </div>
-      </div>
+      <Divider sx={{ borderColor: "rgba(255,255,255,0.1)" }} />
 
-      {/* Top Categories Section */}
-      <div className="py-12 px-6 md:px-20 bg-gray-100">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">Top Categories</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[
-            "Finance",
-            "Admin",
-            "Construction",
-            "Automotive",
-            "Business",
-            "Agriculture",
-            "IT",
-            "Customer Service",
-          ].map((category, index) => (
-            <div
-              key={index}
-              className="bg-white p-6 rounded-lg shadow hover:shadow-xl text-center font-semibold"
-            >
-              {category}
-            </div>
+      {/* Main Footer Content */}
+      <Container maxWidth="lg" sx={{ pt: 6 }}>
+        <Grid container spacing={4}>
+          {/* Company Info */}
+          <Grid item xs={12} md={4}>
+            <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold", color: "#f7b801" }}>
+              Ali Fennix
+            </Typography>
+            <Typography variant="body2" sx={{ mb: 3, opacity: 0.8, lineHeight: 1.6 }}>
+              Your one-stop destination for all your shopping needs. We offer quality products, fast
+              delivery, and exceptional customer service.
+            </Typography>
+
+            {/* Contact Info */}
+            <Box sx={{ mb: 3 }}>
+              <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+                <Email sx={{ fontSize: 18, mr: 1, color: "#f7b801" }} />
+                <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                  support@alifennix.com
+                </Typography>
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+                <Phone sx={{ fontSize: 18, mr: 1, color: "#f7b801" }} />
+                <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                  +1 (555) 123-4567
+                </Typography>
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <LocationOn sx={{ fontSize: 18, mr: 1, color: "#f7b801" }} />
+                <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                  123 Shopping Street, E-Commerce City
+                </Typography>
+              </Box>
+            </Box>
+
+            {/* Social Links */}
+            <Box>
+              <Typography variant="h6" sx={{ mb: 2, fontSize: "1rem" }}>
+                Follow Us
+              </Typography>
+              <Box sx={{ display: "flex", gap: 1 }}>
+                {[
+                  { icon: <Facebook />, href: "#" },
+                  { icon: <Twitter />, href: "#" },
+                  { icon: <Instagram />, href: "#" },
+                  { icon: <LinkedIn />, href: "#" },
+                  { icon: <YouTube />, href: "#" },
+                ].map((social, index) => (
+                  <IconButton
+                    key={index}
+                    sx={{
+                      color: "white",
+                      bgcolor: "rgba(255,255,255,0.1)",
+                      "&:hover": { bgcolor: "#f7b801", color: "#1a1a2e" },
+                    }}
+                    component={Link}
+                    href={social.href}
+                  >
+                    {social.icon}
+                  </IconButton>
+                ))}
+              </Box>
+            </Box>
+          </Grid>
+
+          {/* Footer Links */}
+          {footerSections.map((section, index) => (
+            <Grid item xs={12} sm={6} md={2} key={index}>
+              <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
+                {section.title}
+              </Typography>
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                {section.links.map((link, linkIndex) => (
+                  <Link
+                    key={linkIndex}
+                    href={link.href}
+                    sx={{
+                      color: "rgba(255,255,255,0.8)",
+                      textDecoration: "none",
+                      "&:hover": { color: "#f7b801" },
+                      fontSize: "0.875rem",
+                    }}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </Box>
+            </Grid>
           ))}
-        </div>
-      </div>
+        </Grid>
 
-      {/* Featured Companies Section */}
-      <div className="py-16 px-6 md:px-20 bg-gradient-to-r from-blue-400 via-blue-600 to-blue-800 text-white">
-        <h2 className="text-4xl font-bold text-center mb-12">Featured Companies</h2>
-        <Carousel
-          autoPlay
-          infiniteLoop
-          showThumbs={false}
-          showStatus={false}
-          interval={4000}
-          className="max-w-5xl mx-auto rounded-xl overflow-hidden shadow-2xl"
+        <Divider sx={{ my: 4, borderColor: "rgba(255,255,255,0.1)" }} />
+
+        {/* Bottom Footer */}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: 2,
+          }}
         >
-          <div>
-            <img src="/images/amen-jobs.jpg" alt="Amen Jobs" />
-          </div>
-          <div>
-            <img src="/images/amen-properties.jpg" alt="Amen Properties" />
-          </div>
-          <div>
-            <img src="/images/amen-finance.jpg" alt="Amen Finance" />
-          </div>
-          <div>
-            <img src="/images/amen-import.jpg" alt="Amen Import Export" />
-          </div>
-        </Carousel>
-      </div>
-
-      {/* How It Works Section */}
-      <div className="py-20 px-6 md:px-20 bg-gray-100">
-        <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">
-          Be Discovered in 3 Simple Steps
-        </h2>
-
-        <div className="grid md:grid-cols-3 gap-12 text-center">
-          {/* Step 1 */}
-          <StepCard
-            icon={<FaUserPlus size={40} />}
-            title="Register & Apply"
-            description="Sign up for a free account and apply to jobs from anywhere."
-          />
-
-          {/* Step 2 */}
-          <StepCard
-            icon={<FaFileAlt size={40} />}
-            title="Build Your Profile"
-            description="Create your profile and let employers discover you easily."
-          />
-
-          {/* Step 3 */}
-          <StepCard
-            icon={<FaBell size={40} />}
-            title="Set Job Alerts"
-            description="Get instant email alerts when jobs matching your skills are posted."
-          />
-        </div>
-      </div>
-    </div>
+          <Typography variant="body2" sx={{ opacity: 0.6 }}>
+            © 2024 Ali Fennix. All rights reserved.
+          </Typography>
+          <Box sx={{ display: "flex", gap: 3 }}>
+            <Link
+              href="#"
+              sx={{
+                color: "rgba(255,255,255,0.6)",
+                textDecoration: "none",
+                fontSize: "0.875rem",
+                "&:hover": { color: "#f7b801" },
+              }}
+            >
+              Terms of Service
+            </Link>
+            <Link
+              href="#"
+              sx={{
+                color: "rgba(255,255,255,0.6)",
+                textDecoration: "none",
+                fontSize: "0.875rem",
+                "&:hover": { color: "#f7b801" },
+              }}
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="#"
+              sx={{
+                color: "rgba(255,255,255,0.6)",
+                textDecoration: "none",
+                fontSize: "0.875rem",
+                "&:hover": { color: "#f7b801" },
+              }}
+            >
+              Cookie Policy
+            </Link>
+          </Box>
+        </Box>
+      </Container>
+    </Box>
   );
 };
 
-const StepCard = ({ icon, title, description }) => (
-  <div className="flex flex-col items-center space-y-6">
-    <div className="bg-white text-blue-800 p-6 rounded-full shadow-lg transform hover:scale-110 transition duration-300">
-      {icon}
-    </div>
-    <h3 className="text-2xl font-semibold text-gray-800">{title}</h3>
-    <p className="text-lg text-gray-600">{description}</p>
-  </div>
-);
-
-import PropTypes from "prop-types";
-
-StepCard.propTypes = {
-  icon: PropTypes.node.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-};
-
-export default Section;
+export default Footer2;
