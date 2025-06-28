@@ -5,6 +5,7 @@ import Billing from "layouts/billing";
 import RTL from "layouts/rtl";
 import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
+import Cart from "layouts/cart";
 
 import Icon from "@mui/material/Icon";
 import Login from "layouts/auth/Login";
@@ -17,7 +18,7 @@ const routes = [
     name: "Home",
     key: "Home",
     icon: <Icon fontSize="small">Dashboard</Icon>,
-    route: "/Dashboard",
+    route: "/",
     component: <Home />,
   },
   {
@@ -59,6 +60,13 @@ const routes = [
     icon: <Icon fontSize="small">person</Icon>,
     route: "/profile",
     component: <Profile />,
+  },
+  {
+    type: "route",
+    name: "Shopping Cart",
+    key: "cart",
+    route: "/cart",
+    component: <Cart />,
   },
   {
     type: "route",
