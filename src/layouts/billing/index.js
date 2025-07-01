@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
@@ -104,6 +104,17 @@ function Dashboard() {
     { icon: <Security />, label: "Secure Payment", value: "100%", color: "#45B7D1" },
     { icon: <Support />, label: "24/7 Support", value: "Always", color: "#96CEB4" },
   ];
+
+  const handleBuyNow = useCallback((item) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+    // Optionally, store selected product in localStorage or context
+    localStorage.setItem('selectedProduct', JSON.stringify(item));
+    navigate('/billing/payment');
+  }, [navigate]);
 
   return (
     <DashboardLayout>
@@ -264,29 +275,29 @@ function Dashboard() {
                 ))
               : // Actual products
                 filteredAndSortedItems.map((item, index) => (
-                  <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-                    <Card
-                      sx={{
+            <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+              <Card
+                sx={{
                         height: "100%",
                         transition: "all 0.3s ease",
-                        cursor: "pointer",
+                  cursor: "pointer",
                         "&:hover": {
                           transform: "translateY(-8px)",
                           boxShadow: theme.shadows[8],
                         },
                         position: "relative",
                         overflow: "hidden",
-                      }}
-                      onClick={() => navigate("/profile")}
-                    >
+                }}
+                onClick={() => navigate("/profile")}
+              >
                       <Box sx={{ position: "relative" }}>
-                        <CardMedia
-                          component="img"
+                <CardMedia
+                  component="img"
                           height="200"
                           image={`http://localhost:8000${item.image}`}
-                          alt={item.title}
-                          sx={{ objectFit: "cover" }}
-                        />
+                  alt={item.title}
+                  sx={{ objectFit: "cover" }}
+                />
                         <IconButton
                           sx={{
                             position: "absolute",
@@ -318,17 +329,17 @@ function Dashboard() {
                           }}
                         />
                       </Box>
-                      <CardContent>
+                <CardContent>
                         <Typography variant="h6" component="h3" fontWeight="bold" sx={{ mb: 1 }}>
-                          {item.title}
-                        </Typography>
+                    {item.title}
+                  </Typography>
                         <Typography
                           variant="body2"
                           color="text.secondary"
                           sx={{ mb: 2, minHeight: "3rem" }}
                         >
-                          {item.description}
-                        </Typography>
+                    {item.description}
+                  </Typography>
                         <Box
                           sx={{
                             display: "flex",
@@ -338,8 +349,8 @@ function Dashboard() {
                           }}
                         >
                           <Typography variant="h5" color="primary" fontWeight="bold">
-                            ${item.price}
-                          </Typography>
+                    ${item.price}
+                  </Typography>
                           <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
                             <Star sx={{ color: "#FFD700", fontSize: 16 }} />
                             <Typography variant="body2" fontWeight="bold">
@@ -359,11 +370,23 @@ function Dashboard() {
                         >
                           Add to Cart
                         </Button>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                ))}
-          </Grid>
+                        <Button
+                          variant="contained"
+                          color="success"
+                          fullWidth
+                          sx={{ mt: 1 }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleBuyNow(item);
+                          }}
+                        >
+                          Buy Now
+                        </Button>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
 
           {/* No Results */}
           {!loading && filteredAndSortedItems.length === 0 && (

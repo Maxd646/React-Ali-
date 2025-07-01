@@ -1,26 +1,53 @@
 import { useState, useEffect } from "react";
-
-// react-github-btn
-import GitHubButton from "react-github-btn";
-
-// @mui material components
+import PropTypes from "prop-types";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Chip from "@mui/material/Chip";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import FormGroup from "@mui/material/FormGroup";
 import Divider from "@mui/material/Divider";
 import Switch from "@mui/material/Switch";
 import IconButton from "@mui/material/IconButton";
-import Link from "@mui/material/Link";
 import Icon from "@mui/material/Icon";
+import Slider from "@mui/material/Slider";
+import Tooltip from "@mui/material/Tooltip";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
 
 // @mui icons
-import TwitterIcon from "@mui/icons-material/Twitter";
-import FacebookIcon from "@mui/icons-material/Facebook";
+import CelebrationIcon from "@mui/icons-material/Celebration";
+import PaletteIcon from "@mui/icons-material/Palette";
+import SettingsIcon from "@mui/icons-material/Settings";
+import AccessibilityIcon from "@mui/icons-material/Accessibility";
+import AnimationIcon from "@mui/icons-material/Animation";
+import ViewInArIcon from "@mui/icons-material/ViewInAr";
+import SpeedIcon from "@mui/icons-material/Speed";
+import ContrastIcon from "@mui/icons-material/Contrast";
+import FontDownloadIcon from "@mui/icons-material/FontDownload";
+import BrushIcon from "@mui/icons-material/Brush";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import SaveIcon from "@mui/icons-material/Save";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import DownloadIcon from "@mui/icons-material/Download";
+import UploadIcon from "@mui/icons-material/Upload";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDButton from "components/MDButton";
-
-// Custom styles for the Configurator
-import ConfiguratorRoot from "examples/Configurator/ConfiguratorRoot";
 
 // Material Dashboard 2 React context
 import {
@@ -33,6 +60,25 @@ import {
   setDarkMode,
 } from "context";
 
+function TabPanel({ children, value, index }) {
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`configurator-tabpanel-${index}`}
+      aria-labelledby={`configurator-tab-${index}`}
+    >
+      {value === index && <Box sx={{ py: 3 }}>{children}</Box>}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  value: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
+};
+
 function Configurator() {
   const [controller, dispatch] = useMaterialUIController();
   const {
@@ -44,22 +90,42 @@ function Configurator() {
     darkMode,
   } = controller;
   const [disabled, setDisabled] = useState(false);
+  const [activeTab, setActiveTab] = useState(0);
   const sidenavColors = ["primary", "dark", "info", "success", "warning", "error"];
 
-  // Use the useEffect hook to change the button state for the sidenav type based on window size.
+  // Advanced customization states
+  const [fontSize, setFontSize] = useState(16);
+  const [cardRadius, setCardRadius] = useState(12);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [animationSpeed, setAnimationSpeed] = useState(1);
+  const [colorScheme, setColorScheme] = useState("default");
+  const [layoutStyle, setLayoutStyle] = useState("modern");
+  const [accessibilityMode, setAccessibilityMode] = useState(false);
+  const [highContrast, setHighContrast] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const [showAnimations, setShowAnimations] = useState(true);
+  const [glassmorphism, setGlassmorphism] = useState(true);
+  const [gradientIntensity, setGradientIntensity] = useState(50);
+  const [shadowIntensity, setShadowIntensity] = useState(20);
+  const [spacing, setSpacing] = useState(16);
+  const [fontFamily, setFontFamily] = useState("Inter");
+
+  // Color schemes
+  const colorSchemes = {
+    default: { primary: "#1976d2", secondary: "#dc004e" },
+    ocean: { primary: "#006064", secondary: "#00acc1" },
+    sunset: { primary: "#ff6f00", secondary: "#ff8f00" },
+    forest: { primary: "#2e7d32", secondary: "#4caf50" },
+    royal: { primary: "#512da8", secondary: "#7b1fa2" },
+    coral: { primary: "#d32f2f", secondary: "#f44336" },
+  };
+
   useEffect(() => {
-    // A function that sets the disabled state of the buttons for the sidenav type.
     function handleDisabled() {
       return window.innerWidth > 1200 ? setDisabled(false) : setDisabled(true);
     }
-
-    // The event listener that's calling the handleDisabled function when resizing the window.
     window.addEventListener("resize", handleDisabled);
-
-    // Call the handleDisabled function to set the state with the initial value.
     handleDisabled();
-
-    // Remove event listener on cleanup
     return () => window.removeEventListener("resize", handleDisabled);
   }, []);
 
@@ -79,253 +145,621 @@ function Configurator() {
   const handleFixedNavbar = () => setFixedNavbar(dispatch, !fixedNavbar);
   const handleDarkMode = () => setDarkMode(dispatch, !darkMode);
 
-  // sidenav type buttons styles
-  const sidenavTypeButtonsStyles = ({
-    functions: { pxToRem },
-    palette: { white, dark, background },
-    borders: { borderWidth },
-  }) => ({
-    height: pxToRem(39),
-    background: darkMode ? background.sidenav : white.main,
-    color: darkMode ? white.main : dark.main,
-    border: `${borderWidth[1]} solid ${darkMode ? white.main : dark.main}`,
+  const handleSaveTheme = () => {
+    setShowConfetti(true);
+    setTimeout(() => setShowConfetti(false), 2000);
+    
+    const themeData = {
+      fontSize,
+      cardRadius,
+      animationSpeed,
+      showAnimations,
+      glassmorphism,
+      gradientIntensity,
+      shadowIntensity,
+    };
+    
+    try {
+      localStorage.setItem("aliFennixTheme", JSON.stringify(themeData));
+      console.log("Theme saved successfully!");
+    } catch (error) {
+      console.warn("Could not save theme to localStorage:", error);
+      // Fallback: Show success message even if localStorage fails
+      alert("Theme settings applied! (Note: Settings will reset on page refresh)");
+    }
+  };
 
-    "&:hover, &:focus, &:focus:not(:hover)": {
-      background: darkMode ? background.sidenav : white.main,
-      color: darkMode ? white.main : dark.main,
-      border: `${borderWidth[1]} solid ${darkMode ? white.main : dark.main}`,
-    },
-  });
+  const handleResetTheme = () => {
+    setFontSize(16);
+    setCardRadius(12);
+    setAnimationSpeed(1);
+    setShowAnimations(true);
+    setGlassmorphism(true);
+    setGradientIntensity(50);
+    setShadowIntensity(20);
+    
+    try {
+      localStorage.removeItem("aliFennixTheme");
+      console.log("Theme reset successfully!");
+    } catch (error) {
+      console.warn("Could not clear localStorage:", error);
+    }
+  };
 
-  // sidenav type active button styles
-  const sidenavTypeActiveButtonStyles = ({
-    functions: { pxToRem, linearGradient },
-    palette: { white, gradients, background },
-  }) => ({
-    height: pxToRem(39),
-    background: darkMode ? white.main : linearGradient(gradients.dark.main, gradients.dark.state),
-    color: darkMode ? background.sidenav : white.main,
+  const handleExportTheme = () => {
+    const themeData = {
+      fontSize,
+      cardRadius,
+      animationSpeed,
+      showAnimations,
+      glassmorphism,
+      gradientIntensity,
+      shadowIntensity,
+    };
+    
+    try {
+      const dataStr = JSON.stringify(themeData, null, 2);
+      const dataBlob = new Blob([dataStr], { type: "application/json" });
+      const url = URL.createObjectURL(dataBlob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "ali-fennix-theme.json";
+      link.click();
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error exporting theme:", error);
+      alert("Could not export theme. Please try again.");
+    }
+  };
 
-    "&:hover, &:focus, &:focus:not(:hover)": {
-      background: darkMode ? white.main : linearGradient(gradients.dark.main, gradients.dark.state),
-      color: darkMode ? background.sidenav : white.main,
-    },
-  });
+  const handleImportTheme = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const themeData = JSON.parse(e.target.result);
+          Object.keys(themeData).forEach(key => {
+            if (typeof themeData[key] !== 'undefined') {
+              const setter = eval(`set${key.charAt(0).toUpperCase() + key.slice(1)}`);
+              setter(themeData[key]);
+            }
+          });
+          console.log("Theme imported successfully!");
+        } catch (error) {
+          console.error("Error importing theme:", error);
+          alert("Invalid theme file. Please check the file format.");
+        }
+      };
+      reader.readAsText(file);
+    }
+  };
 
   return (
-    <ConfiguratorRoot variant="permanent" ownerState={{ openConfigurator }}>
+    <Drawer
+      variant="temporary"
+      open={openConfigurator}
+      onClose={handleCloseConfigurator}
+      anchor="right"
+      sx={{
+        zIndex: 1302,
+        "& .MuiDrawer-paper": {
+          width: 400,
+          background: "linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%)",
+          backdropFilter: "blur(20px)",
+          border: "1px solid rgba(255,255,255,0.2)",
+          boxShadow: "0 25px 50px -12px rgba(0,0,0,0.25)",
+        },
+      }}
+    >
+      {showConfetti && (
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: 999,
+            pointerEvents: "none",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <CelebrationIcon
+            sx={{
+              fontSize: 80,
+              color: "warning.main",
+              animation: "bounce 0.6s ease-in-out infinite alternate",
+            }}
+          />
+        </Box>
+      )}
+
       <MDBox
-        display="flex"
-        justifyContent="space-between"
-        alignItems="baseline"
-        pt={4}
-        pb={0.5}
-        px={3}
+        sx={{
+          background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          color: "white",
+          p: 3,
+          position: "relative",
+          overflow: "hidden",
+        }}
       >
+        <Box
+          sx={{
+            position: "absolute",
+            top: -50,
+            right: -50,
+            width: 100,
+            height: 100,
+            borderRadius: "50%",
+            background: "rgba(255,255,255,0.1)",
+            animation: "pulse 2s infinite",
+          }}
+        />
+        <MDBox display="flex" justifyContent="space-between" alignItems="center">
         <MDBox>
-          <MDTypography variant="h5">Material UI Configurator</MDTypography>
-          <MDTypography variant="body2" color="text">
-            See our dashboard options.
+            <MDTypography variant="h5" color="white" fontWeight="bold">
+              <AutoAwesomeIcon sx={{ mr: 1, verticalAlign: "middle" }} />
+              Theme Studio
+            </MDTypography>
+            <MDTypography variant="body2" color="rgba(255,255,255,0.8)">
+              Customize your experience
           </MDTypography>
+          </MDBox>
+          <IconButton
+            onClick={handleCloseConfigurator}
+            sx={{ color: "white", "&:hover": { background: "rgba(255,255,255,0.1)" } }}
+          >
+            <Icon>close</Icon>
+          </IconButton>
+        </MDBox>
         </MDBox>
 
-        <Icon
-          sx={({ typography: { size }, palette: { dark, white } }) => ({
-            fontSize: `${size.lg} !important`,
-            color: darkMode ? white.main : dark.main,
-            stroke: "currentColor",
-            strokeWidth: "2px",
-            cursor: "pointer",
-            transform: "translateY(5px)",
-          })}
-          onClick={handleCloseConfigurator}
+      <MDBox sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Tabs
+          value={activeTab}
+          onChange={(e, newValue) => setActiveTab(newValue)}
+          variant="scrollable"
+          scrollButtons="auto"
+          sx={{
+            "& .MuiTab-root": {
+              minWidth: "auto",
+              px: 2,
+              py: 1.5,
+            },
+          }}
         >
-          close
-        </Icon>
+          <Tab
+            icon={<PaletteIcon />}
+            label="Colors"
+            iconPosition="start"
+            sx={{ fontSize: "0.75rem" }}
+          />
+          <Tab
+            icon={<SettingsIcon />}
+            label="Layout"
+            iconPosition="start"
+            sx={{ fontSize: "0.75rem" }}
+          />
+          <Tab
+            icon={<AnimationIcon />}
+            label="Effects"
+            iconPosition="start"
+            sx={{ fontSize: "0.75rem" }}
+          />
+          <Tab
+            icon={<AccessibilityIcon />}
+            label="Accessibility"
+            iconPosition="start"
+            sx={{ fontSize: "0.75rem" }}
+          />
+        </Tabs>
       </MDBox>
 
-      <Divider />
-
-      <MDBox pt={0.5} pb={3} px={3}>
+      <Box sx={{ flexGrow: 1, overflow: "auto" }}>
+        <TabPanel value={activeTab} index={0}>
         <MDBox>
-          <MDTypography variant="h6">Sidenav Colors</MDTypography>
+            <Accordion defaultExpanded>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <MDTypography variant="h6" display="flex" alignItems="center">
+                  <BrushIcon sx={{ mr: 1 }} />
+                  Color Schemes
+                </MDTypography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Grid container spacing={2}>
+                  {Object.entries(colorSchemes).map(([name, colors]) => (
+                    <Grid item xs={6} key={name}>
+                      <Paper
+                        sx={{
+                          p: 2,
+                          cursor: "pointer",
+                          border: colorScheme === name ? "2px solid #1976d2" : "1px solid #e0e0e0",
+                          transition: "all 0.3s ease",
+                          "&:hover": { transform: "translateY(-2px)", boxShadow: 3 },
+                        }}
+                        onClick={() => setColorScheme(name)}
+                      >
+                        <MDTypography variant="button" textTransform="capitalize" gutterBottom>
+                          {name}
+                        </MDTypography>
+                        <Box display="flex" gap={1}>
+                          <Box
+                            sx={{
+                              width: 20,
+                              height: 20,
+                              borderRadius: "50%",
+                              background: colors.primary,
+                            }}
+                          />
+                          <Box
+                            sx={{
+                              width: 20,
+                              height: 20,
+                              borderRadius: "50%",
+                              background: colors.secondary,
+                            }}
+                          />
+                        </Box>
+                      </Paper>
+                    </Grid>
+                  ))}
+                </Grid>
+              </AccordionDetails>
+            </Accordion>
 
-          <MDBox mb={0.5}>
+            <Accordion>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <MDTypography variant="h6" display="flex" alignItems="center">
+                  <ContrastIcon sx={{ mr: 1 }} />
+                  Sidenav Colors
+                </MDTypography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <MDBox display="flex" gap={1} flexWrap="wrap">
             {sidenavColors.map((color) => (
               <IconButton
                 key={color}
-                sx={({
-                  borders: { borderWidth },
-                  palette: { white, dark, background },
-                  transitions,
-                }) => ({
-                  width: "24px",
-                  height: "24px",
-                  padding: 0,
-                  border: `${borderWidth[1]} solid ${darkMode ? background.sidenav : white.main}`,
-                  borderColor: () => {
-                    let borderColorValue = sidenavColor === color && dark.main;
-
-                    if (darkMode && sidenavColor === color) {
-                      borderColorValue = white.main;
-                    }
-
-                    return borderColorValue;
-                  },
-                  transition: transitions.create("border-color", {
-                    easing: transitions.easing.sharp,
-                    duration: transitions.duration.shorter,
-                  }),
-                  backgroundImage: ({ functions: { linearGradient }, palette: { gradients } }) =>
-                    linearGradient(gradients[color].main, gradients[color].state),
-
-                  "&:not(:last-child)": {
-                    mr: 1,
-                  },
-
-                  "&:hover, &:focus, &:active": {
-                    borderColor: darkMode ? white.main : dark.main,
-                  },
-                })}
+                      sx={{
+                        width: 32,
+                        height: 32,
+                        border: sidenavColor === color ? "2px solid #1976d2" : "1px solid #e0e0e0",
+                        background: `linear-gradient(45deg, ${color}.main, ${color}.light)`,
+                        "&:hover": { transform: "scale(1.1)" },
+                      }}
                 onClick={() => setSidenavColor(dispatch, color)}
               />
             ))}
           </MDBox>
-        </MDBox>
+              </AccordionDetails>
+            </Accordion>
 
-        <MDBox mt={3} lineHeight={1}>
-          <MDTypography variant="h6">Sidenav Type</MDTypography>
-          <MDTypography variant="button" color="text">
-            Choose between different sidenav types.
+            <Accordion>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <MDTypography variant="h6" display="flex" alignItems="center">
+                  <ViewInArIcon sx={{ mr: 1 }} />
+                  Theme Mode
+                </MDTypography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <MDBox display="flex" justifyContent="space-between" alignItems="center">
+                  <MDTypography variant="body2">Dark Mode</MDTypography>
+                  <Switch checked={darkMode} onChange={handleDarkMode} />
+                </MDBox>
+                <MDBox display="flex" justifyContent="space-between" alignItems="center" mt={2}>
+                  <MDTypography variant="body2">High Contrast</MDTypography>
+                  <Switch checked={highContrast} onChange={setHighContrast} />
+                </MDBox>
+              </AccordionDetails>
+            </Accordion>
+          </MDBox>
+        </TabPanel>
+
+        <TabPanel value={activeTab} index={1}>
+          <MDBox>
+            <Accordion defaultExpanded>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <MDTypography variant="h6" display="flex" alignItems="center">
+                  <FontDownloadIcon sx={{ mr: 1 }} />
+                  Typography
+                </MDTypography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <MDBox mb={3}>
+                  <MDTypography variant="body2" gutterBottom>
+                    Font Size: {fontSize}px
+                  </MDTypography>
+                  <Slider
+                    value={fontSize}
+                    min={12}
+                    max={24}
+                    step={1}
+                    onChange={(_, v) => setFontSize(v)}
+                    valueLabelDisplay="auto"
+                  />
+                </MDBox>
+                <MDBox mb={3}>
+                  <FormControl fullWidth>
+                    <InputLabel>Font Family</InputLabel>
+                    <Select
+                      value={fontFamily}
+                      onChange={(e) => setFontFamily(e.target.value)}
+                      label="Font Family"
+                    >
+                      <MenuItem value="Inter">Inter</MenuItem>
+                      <MenuItem value="Roboto">Roboto</MenuItem>
+                      <MenuItem value="Open Sans">Open Sans</MenuItem>
+                      <MenuItem value="Poppins">Poppins</MenuItem>
+                      <MenuItem value="Montserrat">Montserrat</MenuItem>
+                    </Select>
+                  </FormControl>
+                </MDBox>
+                <MDBox>
+                  <MDTypography variant="body2" gutterBottom>
+                    Spacing: {spacing}px
+                  </MDTypography>
+                  <Slider
+                    value={spacing}
+                    min={8}
+                    max={32}
+                    step={4}
+                    onChange={(_, v) => setSpacing(v)}
+                    valueLabelDisplay="auto"
+                  />
+                </MDBox>
+              </AccordionDetails>
+            </Accordion>
+
+            <Accordion>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <MDTypography variant="h6" display="flex" alignItems="center">
+                  <ViewInArIcon sx={{ mr: 1 }} />
+                  Components
+                </MDTypography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <MDBox mb={3}>
+                  <MDTypography variant="body2" gutterBottom>
+                    Card Radius: {cardRadius}px
+                  </MDTypography>
+                  <Slider
+                    value={cardRadius}
+                    min={0}
+                    max={32}
+                    step={2}
+                    onChange={(_, v) => setCardRadius(v)}
+                    valueLabelDisplay="auto"
+                  />
+                </MDBox>
+                <MDBox display="flex" justifyContent="space-between" alignItems="center">
+                  <MDTypography variant="body2">Fixed Navbar</MDTypography>
+                  <Switch checked={fixedNavbar} onChange={handleFixedNavbar} />
+                </MDBox>
+              </AccordionDetails>
+            </Accordion>
+          </MDBox>
+        </TabPanel>
+
+        <TabPanel value={activeTab} index={2}>
+          <MDBox>
+            <Accordion defaultExpanded>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <MDTypography variant="h6" display="flex" alignItems="center">
+                  <AnimationIcon sx={{ mr: 1 }} />
+                  Animations
+                </MDTypography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <MDBox mb={3}>
+                  <MDTypography variant="body2" gutterBottom>
+                    Animation Speed: {animationSpeed}x
+                  </MDTypography>
+                  <Slider
+                    value={animationSpeed}
+                    min={0.5}
+                    max={2}
+                    step={0.1}
+                    onChange={(_, v) => setAnimationSpeed(v)}
+                    valueLabelDisplay="auto"
+                  />
+                </MDBox>
+                <MDBox display="flex" justifyContent="space-between" alignItems="center">
+                  <MDTypography variant="body2">Show Animations</MDTypography>
+                  <Switch checked={showAnimations} onChange={setShowAnimations} />
+                </MDBox>
+                <MDBox display="flex" justifyContent="space-between" alignItems="center" mt={2}>
+                  <MDTypography variant="body2">Reduced Motion</MDTypography>
+                  <Switch checked={reducedMotion} onChange={setReducedMotion} />
+                </MDBox>
+              </AccordionDetails>
+            </Accordion>
+
+            <Accordion>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <MDTypography variant="h6" display="flex" alignItems="center">
+                  <BrushIcon sx={{ mr: 1 }} />
+                  Visual Effects
+                </MDTypography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <MDBox display="flex" justifyContent="space-between" alignItems="center">
+                  <MDTypography variant="body2">Glassmorphism</MDTypography>
+                  <Switch checked={glassmorphism} onChange={setGlassmorphism} />
+                </MDBox>
+                <MDBox mb={3}>
+                  <MDTypography variant="body2" gutterBottom>
+                    Gradient Intensity: {gradientIntensity}%
+                  </MDTypography>
+                  <Slider
+                    value={gradientIntensity}
+                    min={0}
+                    max={100}
+                    step={5}
+                    onChange={(_, v) => setGradientIntensity(v)}
+                    valueLabelDisplay="auto"
+                  />
+                </MDBox>
+                <MDBox>
+                  <MDTypography variant="body2" gutterBottom>
+                    Shadow Intensity: {shadowIntensity}%
+                  </MDTypography>
+                  <Slider
+                    value={shadowIntensity}
+                    min={0}
+                    max={100}
+                    step={5}
+                    onChange={(_, v) => setShadowIntensity(v)}
+                    valueLabelDisplay="auto"
+                  />
+                </MDBox>
+              </AccordionDetails>
+            </Accordion>
+        </MDBox>
+        </TabPanel>
+
+        <TabPanel value={activeTab} index={3}>
+          <MDBox>
+            <Accordion defaultExpanded>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <MDTypography variant="h6" display="flex" alignItems="center">
+                  <AccessibilityIcon sx={{ mr: 1 }} />
+                  Accessibility Features
+                </MDTypography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={accessibilityMode}
+                        onChange={(e) => setAccessibilityMode(e.target.checked)}
+                      />
+                    }
+                    label="Enhanced Accessibility Mode"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={highContrast}
+                        onChange={(e) => setHighContrast(e.target.checked)}
+                      />
+                    }
+                    label="High Contrast Mode"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={reducedMotion}
+                        onChange={(e) => setReducedMotion(e.target.checked)}
+                      />
+                    }
+                    label="Reduced Motion"
+                  />
+                </FormGroup>
+              </AccordionDetails>
+            </Accordion>
+
+            <Accordion>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <MDTypography variant="h6" display="flex" alignItems="center">
+                  <SpeedIcon sx={{ mr: 1 }} />
+                  Performance
           </MDTypography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <MDBox>
+                  <Chip
+                    label="Theme Optimized"
+                    color="success"
+                    icon={<SpeedIcon />}
+                    sx={{ mr: 1, mb: 1 }}
+                  />
+                  <Chip
+                    label="Accessibility Ready"
+                    color="info"
+                    icon={<AccessibilityIcon />}
+                    sx={{ mr: 1, mb: 1 }}
+                  />
+                  <Chip
+                    label="Mobile Responsive"
+                    color="warning"
+                    icon={<ViewInArIcon />}
+                    sx={{ mb: 1 }}
+                  />
+                </MDBox>
+              </AccordionDetails>
+            </Accordion>
+          </MDBox>
+        </TabPanel>
+      </Box>
 
           <MDBox
             sx={{
-              display: "flex",
-              mt: 2,
-              mr: 1,
-            }}
-          >
+          p: 3,
+          borderTop: "1px solid rgba(0,0,0,0.1)",
+          background: "rgba(255,255,255,0.8)",
+          backdropFilter: "blur(10px)",
+        }}
+      >
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
             <MDButton
-              color="dark"
-              variant="gradient"
-              onClick={handleDarkSidenav}
-              disabled={disabled}
+              variant="outlined"
+              color="secondary"
+              startIcon={<RefreshIcon />}
+              onClick={handleResetTheme}
               fullWidth
-              sx={
-                !transparentSidenav && !whiteSidenav
-                  ? sidenavTypeActiveButtonStyles
-                  : sidenavTypeButtonsStyles
-              }
             >
-              Dark
+              Reset
             </MDButton>
-            <MDBox sx={{ mx: 1, width: "8rem", minWidth: "8rem" }}>
-              <MDButton
-                color="dark"
-                variant="gradient"
-                onClick={handleTransparentSidenav}
-                disabled={disabled}
-                fullWidth
-                sx={
-                  transparentSidenav && !whiteSidenav
-                    ? sidenavTypeActiveButtonStyles
-                    : sidenavTypeButtonsStyles
-                }
-              >
-                Transparent
-              </MDButton>
-            </MDBox>
+          </Grid>
+          <Grid item xs={6}>
             <MDButton
-              color="dark"
-              variant="gradient"
-              onClick={handleWhiteSidenav}
-              disabled={disabled}
+              variant="contained"
+              color="warning"
+              startIcon={<SaveIcon />}
+              onClick={handleSaveTheme}
               fullWidth
-              sx={
-                whiteSidenav && !transparentSidenav
-                  ? sidenavTypeActiveButtonStyles
-                  : sidenavTypeButtonsStyles
-              }
             >
-              White
+              Save
             </MDButton>
-          </MDBox>
-        </MDBox>
-        <MDBox
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          mt={3}
-          lineHeight={1}
-        >
-          <MDTypography variant="h6">Navbar Fixed</MDTypography>
-
-          <Switch checked={fixedNavbar} onChange={handleFixedNavbar} />
-        </MDBox>
-        <Divider />
-        <MDBox display="flex" justifyContent="space-between" alignItems="center" lineHeight={1}>
-          <MDTypography variant="h6">Light / Dark</MDTypography>
-
-          <Switch checked={darkMode} onChange={handleDarkMode} />
-        </MDBox>
-        <Divider />
-        <MDBox mt={3} mb={2}>
+          </Grid>
+          <Grid item xs={6}>
           <MDButton
-            component={Link}
-            href="https://www.Ali fennix.com"
-            target="_blank"
-            rel="noreferrer"
-            color={darkMode ? "light" : "dark"}
             variant="outlined"
+              color="info"
+              startIcon={<DownloadIcon />}
+              onClick={handleExportTheme}
             fullWidth
           >
-            view documentation
+              Export
           </MDButton>
-        </MDBox>
-        <MDBox display="flex" justifyContent="center">
-          <GitHubButton
-            href="https://github.com/Alifennix/material-dashboard-react"
-            data-icon="octicon-star"
-            data-size="large"
-            data-show-count="true"
-            aria-label="Star creativetimofficial/material-dashboard-react on GitHub"
-          >
-            Star
-          </GitHubButton>
-        </MDBox>
-        <MDBox mt={2} textAlign="center">
-          <MDBox mb={0.5}>
-            <MDTypography variant="h6">Thank you for sharing!</MDTypography>
-          </MDBox>
-
-          <MDBox display="flex" justifyContent="center">
-            <MDBox mr={1.5}>
+          </Grid>
+          <Grid item xs={6}>
+            <label htmlFor="import-theme">
               <MDButton
-                component={Link}
-                href="//twitter.com/intent/tweet?text=Check%20Material%20Dashboard%20React%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23react%20%mui&url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fmaterial-dashboard-react"
-                target="_blank"
-                rel="noreferrer"
-                color="dark"
+                variant="outlined"
+                color="success"
+                startIcon={<UploadIcon />}
+                component="span"
+                fullWidth
               >
-                <TwitterIcon />
-                &nbsp; Tweet
+                Import
               </MDButton>
-            </MDBox>
-            <MDButton
-              component={Link}
-              href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/material-dashboard-react"
-              target="_blank"
-              rel="noreferrer"
-              color="dark"
-            >
-              <FacebookIcon />
-              &nbsp; Share
-            </MDButton>
-          </MDBox>
-        </MDBox>
+            </label>
+            <input
+              id="import-theme"
+              type="file"
+              accept=".json"
+              onChange={handleImportTheme}
+              style={{ display: "none" }}
+            />
+          </Grid>
+        </Grid>
       </MDBox>
-    </ConfiguratorRoot>
+    </Drawer>
   );
 }
 

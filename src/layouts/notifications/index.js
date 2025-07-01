@@ -71,7 +71,7 @@ const ExpandableText = ({ text, maxLength = 100 }) => {
       >
         {displayText}
         {isLong && !expanded && "..."}
-      </Typography>
+        </Typography>
       {isLong && (
         <Button
           size="small"
@@ -211,7 +211,7 @@ function Dashboard() {
             <Button
               variant="contained"
               size="large"
-              sx={{
+            sx={{
                 bgcolor: "white",
                 color: "#DDA0DD",
                 "&:hover": { bgcolor: "#f5f5f5" },
@@ -245,7 +245,7 @@ function Dashboard() {
             {statistics.map((stat, index) => (
               <Grid item xs={6} md={3} key={index}>
                 <Card
-                  sx={{
+                sx={{
                     textAlign: "center",
                     p: 3,
                     height: "100%",

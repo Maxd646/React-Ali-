@@ -118,55 +118,114 @@ a:hover {
 
 /* Keyframe Animations */
 @keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.1); opacity: 0.8; }
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes glow {
-  0%, 100% { box-shadow: 0 0 5px rgba(255, 107, 107, 0.5); }
-  50% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.8), 0 0 30px rgba(255, 107, 107, 0.6); }
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.8), 0 0 30px rgba(255, 107, 107, 0.6);
+  }
 }
 
 @keyframes slideIn {
-  from { transform: translateY(-100%); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes fadeInUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-10px); }
-  60% { transform: translateY(-5px); }
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 @keyframes confetti {
-  0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
 }
 
 /* Glassmorphism Effects */
@@ -201,18 +260,18 @@ a {
 }
 
 a:hover {
-  color: #FF6B6B;
+  color: #ff6b6b;
   transform: translateX(4px);
 }
 
 a::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 0;
   height: 2px;
   bottom: -2px;
   left: 0;
-  background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
   transition: width 0.3s ease;
 }
 
@@ -227,7 +286,7 @@ a:hover::after {
 }
 
 .logo-container::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -268,7 +327,7 @@ a:hover::after {
 }
 
 .animated-button::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -292,13 +351,13 @@ a:hover::after {
 }
 
 .category-item::before {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -5px;
   left: 50%;
   width: 0;
   height: 3px;
-  background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
   transform: translateX(-50%);
   transition: width 0.3s ease;
   border-radius: 2px;
@@ -320,7 +379,7 @@ a:hover::after {
 }
 
 .mega-menu-item::before {
-  content: '';
+  content: "";
   position: absolute;
   left: -100%;
   top: 0;
@@ -372,7 +431,7 @@ a:hover::after {
 }
 
 .mobile-menu-item::before {
-  content: '';
+  content: "";
   position: absolute;
   left: -100%;
   top: 0;
@@ -393,13 +452,18 @@ a:hover::after {
 }
 
 .promo-banner::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
   animation: shimmer 2s infinite;
 }
 
@@ -408,7 +472,7 @@ a:hover::after {
   position: absolute;
   width: 10px;
   height: 10px;
-  background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4);
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
   animation: confetti 3s linear infinite;
 }
 
@@ -417,11 +481,11 @@ a:hover::after {
   .glass-effect {
     backdrop-filter: blur(10px);
   }
-  
+
   .search-container:focus-within {
     transform: scale(1.01);
   }
-  
+
   .category-item::before {
     display: none;
   }
@@ -433,7 +497,7 @@ a:hover::after {
     background: rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
+
   .glass-card {
     background: rgba(0, 0, 0, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -459,7 +523,7 @@ a:hover::after {
 
 /* Text Gradient Effects */
 .gradient-text {
-  background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4);
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
   background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -490,17 +554,17 @@ a:hover::after {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(45deg, #FF5252, #26A69A);
+  background: linear-gradient(45deg, #ff5252, #26a69a);
 }
 
 /* Focus States */
 .focus-visible {
-  outline: 2px solid #FF6B6B;
+  outline: 2px solid #ff6b6b;
   outline-offset: 2px;
   border-radius: 4px;
 }

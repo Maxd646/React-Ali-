@@ -36,12 +36,49 @@ import {
   Discount,
   LocalShipping,
   Support,
+  LinkedIn,
 } from "@mui/icons-material";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "./validationSchema";
+import logo from "../../assets/images/logo-ct.png";
+import bgSignIn from "../../assets/images/bg-sign-in-basic.jpeg";
+import aboutImg from "../../assets/images/about-img.png";
+import team1 from "../../assets/images/team-1.jpg";
+import team2 from "../../assets/images/team-2.jpg";
+import team3 from "../../assets/images/team-3.jpg";
+import team4 from "../../assets/images/team-4.jpg";
+
+const teamMembersLeft = [
+  {
+    img: team1,
+    name: 'Jane Smith',
+    title: 'CEO',
+    desc: 'Visionary leader with 15+ years in tech innovation.'
+  },
+  {
+    img: team2,
+    name: 'John Doe',
+    title: 'Director',
+    desc: 'Expert in operations and business growth.'
+  }
+];
+const teamMembersRight = [
+  {
+    img: team3,
+    name: 'Emily Chen',
+    title: 'CTO',
+    desc: 'Architect of scalable, secure platforms.'
+  },
+  {
+    img: team4,
+    name: 'Carlos Ruiz',
+    title: 'COO',
+    desc: 'Driving efficiency and excellence every day.'
+  }
+];
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -163,7 +200,7 @@ const Login = () => {
     <Box
       sx={{
         minHeight: "100vh",
-        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        background: `url(${bgSignIn}) center/cover no-repeat, linear-gradient(135deg, #667eea 0%, #764ba2 100%)`,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -172,9 +209,53 @@ const Login = () => {
         py: 4,
       }}
     >
+      {/* Left team member cards for desktop */}
+      <Box sx={{ display: { md: "flex", xs: "none" }, flexDirection: "column", alignItems: "center", justifyContent: "center", mr: 4, gap: 4 }}>
+        {teamMembersLeft.map((member, idx) => (
+          <Box key={idx} sx={{
+            width: 200,
+            bgcolor: 'rgba(255,255,255,0.92)',
+            borderRadius: 4,
+            boxShadow: '0 8px 32px rgba(118,75,162,0.13)',
+            overflow: 'hidden',
+            mb: 2,
+            textAlign: 'center',
+            p: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            position: 'relative',
+            transition: 'transform 0.3s, box-shadow 0.3s',
+            border: '3px solid',
+            borderImage: 'linear-gradient(120deg, #764ba2, #667eea, #43cea2, #185a9d) 1',
+            animation: 'gradientBorder 3s linear infinite',
+            '&:hover': {
+              transform: 'scale(1.06) translateY(-6px)',
+              boxShadow: '0 16px 48px #764ba277',
+              borderImage: 'linear-gradient(120deg, #43cea2, #764ba2, #667eea, #185a9d) 1',
+            },
+            '@keyframes gradientBorder': {
+              '0%': { borderImage: 'linear-gradient(120deg, #764ba2, #667eea, #43cea2, #185a9d) 1' },
+              '100%': { borderImage: 'linear-gradient(420deg, #764ba2, #667eea, #43cea2, #185a9d) 1' },
+            },
+          }} component={motion.div} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 + idx * 0.2 }}>
+            <img src={member.img} alt={member.name} style={{ width: '100%', height: 220, objectFit: 'cover', borderRadius: 12, marginBottom: 12, boxShadow: '0 2px 16px #764ba233' }} />
+            <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'primary.main' }}>{member.name}</Typography>
+            <Typography variant="subtitle2" sx={{ color: 'text.secondary', mb: 1 }}>{member.title}</Typography>
+            <Typography variant="body2" sx={{ color: 'text.secondary', mb: 1 }}>{member.desc}</Typography>
+            <IconButton href="#" target="_blank" rel="noopener" sx={{ color: '#0A66C2', bgcolor: 'rgba(10,102,194,0.08)', mt: 1, '&:hover': { bgcolor: 'rgba(10,102,194,0.18)' } }}>
+              <LinkedIn />
+            </IconButton>
+          </Box>
+        ))}
+      </Box>
       <FloatingParticles />
 
       <Container maxWidth="sm">
+        <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+          <img src={logo} alt="Logo" style={{ height: 56, filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.12))" }} />
+        </Box>
+
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -282,10 +363,15 @@ const Login = () => {
                             ),
                           }}
                           sx={{
-                            "& .MuiOutlinedInput-root": {
+                            '& .MuiOutlinedInput-root': {
                               borderRadius: 2,
-                              "&:hover fieldset": {
-                                borderColor: "primary.main",
+                              transition: 'box-shadow 0.3s',
+                              '&.Mui-focused fieldset': {
+                                borderColor: 'primary.main',
+                                boxShadow: '0 0 0 2px #764ba233',
+                              },
+                              '&:hover fieldset': {
+                                borderColor: 'primary.main',
                               },
                             },
                           }}
@@ -324,10 +410,15 @@ const Login = () => {
                             ),
                           }}
                           sx={{
-                            "& .MuiOutlinedInput-root": {
+                            '& .MuiOutlinedInput-root': {
                               borderRadius: 2,
-                              "&:hover fieldset": {
-                                borderColor: "primary.main",
+                              transition: 'box-shadow 0.3s',
+                              '&.Mui-focused fieldset': {
+                                borderColor: 'primary.main',
+                                boxShadow: '0 0 0 2px #764ba233',
+                              },
+                              '&:hover fieldset': {
+                                borderColor: 'primary.main',
                               },
                             },
                           }}
@@ -413,11 +504,14 @@ const Login = () => {
                             startIcon={<Google />}
                             onClick={() => handleSocialLogin("Google")}
                             sx={{
-                              borderColor: "#DB4437",
-                              color: "#DB4437",
-                              "&:hover": {
-                                borderColor: "#C1351D",
-                                bgcolor: "rgba(219, 68, 55, 0.1)",
+                              borderColor: '#DB4437',
+                              color: '#fff',
+                              background: 'linear-gradient(90deg, #DB4437 60%, #fff0 100%)',
+                              fontWeight: 'bold',
+                              '&:hover': {
+                                borderColor: '#C1351D',
+                                background: 'linear-gradient(90deg, #C1351D 60%, #fff0 100%)',
+                                color: '#fff',
                               },
                             }}
                           >
@@ -467,6 +561,32 @@ const Login = () => {
                               Sign up here
                             </Typography>
                           </Typography>
+                        </Box>
+                      </motion.div>
+
+                      {/* Contact Us Button */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.8 }}
+                      >
+                        <Box sx={{ textAlign: 'center', mt: 3 }}>
+                          <Button
+                            variant="contained"
+                            color="secondary"
+                            size="large"
+                            sx={{
+                              background: 'linear-gradient(90deg, #43cea2 0%, #185a9d 100%)',
+                              fontWeight: 'bold',
+                              borderRadius: 2,
+                              px: 4,
+                              boxShadow: '0 2px 12px #43cea244',
+                              '&:hover': { background: 'linear-gradient(90deg, #185a9d 0%, #43cea2 100%)' },
+                            }}
+                            href="#contact"
+                          >
+                            Contact Us
+                          </Button>
                         </Box>
                       </motion.div>
                     </Box>
@@ -578,6 +698,121 @@ const Login = () => {
           {snackbar.message}
         </Alert>
       </Snackbar>
+
+      {/* Main content and illustration */}
+      <Box sx={{ display: { md: "flex", xs: "block" }, alignItems: "center", justifyContent: "center" }}>
+        <Box sx={{ flex: 1, display: { md: "block", xs: "none" }, pr: 4 }}>
+          <img src={aboutImg} alt="Welcome" style={{ width: "100%", maxWidth: 320, borderRadius: 24, boxShadow: "0 8px 32px rgba(118,75,162,0.12)" }} />
+        </Box>
+        <Box sx={{ flex: 1 }}>
+          {/* Main Login Card and rest of the form here */}
+          {/* ...existing Paper and form code... */}
+        </Box>
+      </Box>
+
+      {/* Right team member cards for desktop */}
+      <Box sx={{ display: { md: "flex", xs: "none" }, flexDirection: "column", alignItems: "center", justifyContent: "center", ml: 4, gap: 4 }}>
+        {teamMembersRight.map((member, idx) => (
+          <Box key={idx} sx={{
+            width: 200,
+            bgcolor: 'rgba(255,255,255,0.92)',
+            borderRadius: 4,
+            boxShadow: '0 8px 32px rgba(118,75,162,0.13)',
+            overflow: 'hidden',
+            mb: 2,
+            textAlign: 'center',
+            p: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            position: 'relative',
+            transition: 'transform 0.3s, box-shadow 0.3s',
+            border: '3px solid',
+            borderImage: 'linear-gradient(120deg, #764ba2, #667eea, #43cea2, #185a9d) 1',
+            animation: 'gradientBorder 3s linear infinite',
+            '&:hover': {
+              transform: 'scale(1.06) translateY(-6px)',
+              boxShadow: '0 16px 48px #764ba277',
+              borderImage: 'linear-gradient(120deg, #43cea2, #764ba2, #667eea, #185a9d) 1',
+            },
+            '@keyframes gradientBorder': {
+              '0%': { borderImage: 'linear-gradient(120deg, #764ba2, #667eea, #43cea2, #185a9d) 1' },
+              '100%': { borderImage: 'linear-gradient(420deg, #764ba2, #667eea, #43cea2, #185a9d) 1' },
+            },
+          }} component={motion.div} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 + idx * 0.2 }}>
+            <img src={member.img} alt={member.name} style={{ width: '100%', height: 220, objectFit: 'cover', borderRadius: 12, marginBottom: 12, boxShadow: '0 2px 16px #764ba233' }} />
+            <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'primary.main' }}>{member.name}</Typography>
+            <Typography variant="subtitle2" sx={{ color: 'text.secondary', mb: 1 }}>{member.title}</Typography>
+            <Typography variant="body2" sx={{ color: 'text.secondary', mb: 1 }}>{member.desc}</Typography>
+            <IconButton href="#" target="_blank" rel="noopener" sx={{ color: '#0A66C2', bgcolor: 'rgba(10,102,194,0.08)', mt: 1, '&:hover': { bgcolor: 'rgba(10,102,194,0.18)' } }}>
+              <LinkedIn />
+            </IconButton>
+          </Box>
+        ))}
+      </Box>
+
+      {/* Add a testimonial/brand section for desktop */}
+      <Box sx={{ display: { md: "flex", xs: "none" }, justifyContent: "center", mt: 6 }}>
+        <Paper elevation={0} sx={{ p: 3, borderRadius: 3, bgcolor: "rgba(255,255,255,0.7)", maxWidth: 340, textAlign: "center", boxShadow: "0 2px 16px rgba(118,75,162,0.10)" }}>
+          <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
+            &quot;This platform made my workflow 10x faster!&quot;
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            — Happy User
+          </Typography>
+          <Button
+            variant="outlined"
+            color="primary"
+            size="medium"
+            sx={{ mt: 2, borderRadius: 2, fontWeight: 'bold', borderWidth: 2, px: 3, borderColor: 'primary.main', '&:hover': { background: 'primary.main', color: 'white' } }}
+            href="#learn-more"
+          >
+            Learn More
+          </Button>
+        </Paper>
+      </Box>
+
+      {/* Meet the Team Button */}
+      <Box sx={{ display: { md: 'flex', xs: 'none' }, justifyContent: 'center', mt: 3 }}>
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          sx={{
+            background: 'linear-gradient(90deg, #764ba2 0%, #43cea2 100%)',
+            fontWeight: 'bold',
+            borderRadius: 2,
+            px: 5,
+            boxShadow: '0 2px 12px #764ba244',
+            '&:hover': { background: 'linear-gradient(90deg, #43cea2 0%, #764ba2 100%)' },
+          }}
+          href="#team"
+        >
+          Meet the Team
+        </Button>
+      </Box>
+
+      {/* Floating 'Help' action button */}
+      <Box sx={{ position: 'fixed', bottom: 32, right: 32, zIndex: 2000 }}>
+        <Button
+          variant="contained"
+          color="info"
+          size="large"
+          sx={{
+            borderRadius: '50%',
+            minWidth: 64,
+            minHeight: 64,
+            boxShadow: '0 4px 24px #185a9d44',
+            background: 'linear-gradient(135deg, #43cea2 0%, #185a9d 100%)',
+            '&:hover': { background: 'linear-gradient(135deg, #185a9d 0%, #43cea2 100%)' },
+            fontSize: 28,
+            p: 0,
+          }}
+          href="#help"
+        >
+          ?
+        </Button>
+      </Box>
     </Box>
   );
 };

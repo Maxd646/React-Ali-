@@ -335,7 +335,7 @@ const Header = () => {
                 sx={{ display: { md: "none" } }}
               >
                 <MenuIcon />
-              </IconButton>
+            </IconButton>
             </motion.div>
 
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -369,8 +369,8 @@ const Header = () => {
                         fontSize: { xs: "1.1rem", md: "1.5rem" },
                       }}
                     >
-                      Ali መ Fennix
-                    </Typography>
+                  Ali መ Fennix
+                </Typography>
                     <Typography
                       variant="caption"
                       sx={{
@@ -394,8 +394,8 @@ const Header = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              <Box
-                sx={{
+          <Box
+            sx={{
                   position: "relative",
                   width: "40%",
                   maxWidth: 600,
@@ -404,8 +404,8 @@ const Header = () => {
                 <Paper
                   elevation={0}
                   sx={{
-                    display: "flex",
-                    alignItems: "center",
+              display: "flex",
+              alignItems: "center",
                     borderRadius: "25px",
                     background: "rgba(255,255,255,0.9)",
                     backdropFilter: "blur(10px)",
@@ -416,12 +416,12 @@ const Header = () => {
                       boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
                       transform: "translateY(-2px)",
                     },
-                  }}
-                >
-                  <Select
-                    defaultValue="All"
-                    variant="standard"
-                    disableUnderline
+            }}
+          >
+            <Select
+              defaultValue="All"
+              variant="standard"
+              disableUnderline
                     sx={{
                       fontSize: "0.875rem",
                       width: "100px",
@@ -436,9 +436,9 @@ const Header = () => {
                     <MenuItem value="Electronics">Electronics</MenuItem>
                     <MenuItem value="Food">Food & Drinks</MenuItem>
                     <MenuItem value="Clothing">Fashion</MenuItem>
-                    <MenuItem value="Books">Books</MenuItem>
+              <MenuItem value="Books">Books</MenuItem>
                     <MenuItem value="Academic">Academic</MenuItem>
-                  </Select>
+            </Select>
                   <Divider orientation="vertical" flexItem />
                   <InputBase
                     placeholder="Search for products, brands, and more..."
@@ -466,10 +466,10 @@ const Header = () => {
                       "&:hover": { bgcolor: "primary.dark" },
                     }}
                   >
-                    <Search />
-                  </IconButton>
+              <Search />
+            </IconButton>
                 </Paper>
-              </Box>
+          </Box>
             </motion.div>
           )}
 
@@ -578,7 +578,7 @@ const Header = () => {
                       },
                     }}
                   >
-                    Login
+                      Login
                   </Button>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -643,7 +643,7 @@ const Header = () => {
             >
               {Object.entries(categories).map(([category, data]) => (
                 <motion.div key={category} whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }}>
-                  <Typography
+            <Typography
                     sx={{
                       cursor: "pointer",
                       fontWeight: "600",
@@ -659,8 +659,8 @@ const Header = () => {
                       },
                     }}
                     onMouseEnter={() => setHoveredCategory(category)}
-                    onMouseLeave={() => setHoveredCategory(null)}
-                  >
+              onMouseLeave={() => setHoveredCategory(null)}
+            >
                     {data.icon}
                     {category}
                     <KeyboardArrowDown
@@ -670,10 +670,10 @@ const Header = () => {
                         transform: hoveredCategory === category ? "rotate(180deg)" : "rotate(0deg)",
                       }}
                     />
-                  </Typography>
+            </Typography>
                 </motion.div>
-              ))}
-            </Box>
+          ))}
+        </Box>
           </motion.div>
         )}
       </AppBar>
@@ -687,15 +687,15 @@ const Header = () => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <Paper
+        <Paper
               elevation={8}
-              onMouseEnter={() => setHoveredCategory(hoveredCategory)}
-              onMouseLeave={() => setHoveredCategory(null)}
-              sx={{
-                position: "absolute",
+          onMouseEnter={() => setHoveredCategory(hoveredCategory)}
+          onMouseLeave={() => setHoveredCategory(null)}
+          sx={{
+            position: "absolute",
                 top: "100%",
-                left: 0,
-                width: "100%",
+            left: 0,
+            width: "100%",
                 zIndex: 1000,
                 background: "rgba(255,255,255,0.95)",
                 backdropFilter: "blur(20px)",
@@ -708,15 +708,15 @@ const Header = () => {
                 sx={{
                   background: categories[hoveredCategory].gradient,
                   py: 3,
-                  px: 4,
+            px: 4,
                   color: "white",
                 }}
               >
                 <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}>
                   {categories[hoveredCategory].icon}
                   <Typography variant="h5" sx={{ fontWeight: "bold" }}>
-                    {hoveredCategory}
-                  </Typography>
+              {hoveredCategory}
+            </Typography>
                   <Chip
                     label="Explore"
                     size="small"
@@ -726,7 +726,7 @@ const Header = () => {
                       fontWeight: "bold",
                     }}
                   />
-                </Box>
+          </Box>
 
                 <Box sx={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
                   {/* Subcategories */}
@@ -735,12 +735,12 @@ const Header = () => {
                       Categories
                     </Typography>
                     <Box sx={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 1 }}>
-                      {categories[hoveredCategory].subcategories.map((sub, idx) => (
+            {categories[hoveredCategory].subcategories.map((sub, idx) => (
                         <motion.div key={idx} whileHover={{ x: 5 }} whileTap={{ scale: 0.95 }}>
-                          <Link
-                            to={`/${hoveredCategory.toLowerCase().replace(/\s/g, "")}/${sub
-                              .toLowerCase()
-                              .replace(/\s/g, "")}`}
+              <Link
+                to={`/${hoveredCategory.toLowerCase().replace(/\s/g, "")}/${sub
+                  .toLowerCase()
+                  .replace(/\s/g, "")}`}
                             style={{ textDecoration: "none", color: "inherit" }}
                           >
                             <Typography
@@ -754,10 +754,10 @@ const Header = () => {
                                   bgcolor: "rgba(255,255,255,0.1)",
                                 },
                               }}
-                            >
-                              {sub}
+              >
+                {sub}
                             </Typography>
-                          </Link>
+              </Link>
                         </motion.div>
                       ))}
                     </Box>
@@ -792,7 +792,7 @@ const Header = () => {
                         </motion.div>
                       ))}
                     </Box>
-                  </Box>
+          </Box>
 
                   {/* Product Images */}
                   <Box sx={{ flex: 1, minWidth: 200 }}>
@@ -800,7 +800,7 @@ const Header = () => {
                       Popular Items
                     </Typography>
                     <Box sx={{ display: "flex", gap: 2 }}>
-                      {categories[hoveredCategory].images.map((img, idx) => (
+            {categories[hoveredCategory].images.map((img, idx) => (
                         <motion.div
                           key={idx}
                           whileHover={{ scale: 1.05, y: -5 }}
@@ -816,9 +816,9 @@ const Header = () => {
                               boxShadow: "0 4px 15px rgba(0,0,0,0.2)",
                             }}
                           >
-                            <img
-                              src={img.src}
-                              alt={img.name}
+                <img
+                  src={img.src}
+                  alt={img.name}
                               style={{
                                 width: "100%",
                                 height: "100%",
@@ -888,7 +888,7 @@ const Header = () => {
               <IconButton sx={{ color: "white" }}>
                 <Search />
               </IconButton>
-            </Paper>
+        </Paper>
           </Box>
 
           {/* Mobile Categories */}

@@ -335,29 +335,29 @@ function Dashboard() {
                 ))
               : // Actual food items
                 filteredAndSortedItems.map((item, index) => (
-                  <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-                    <Card
-                      sx={{
+            <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+              <Card
+                sx={{
                         height: "100%",
                         transition: "all 0.3s ease",
-                        cursor: "pointer",
+                  cursor: "pointer",
                         "&:hover": {
                           transform: "translateY(-8px)",
                           boxShadow: theme.shadows[8],
                         },
                         position: "relative",
                         overflow: "hidden",
-                      }}
-                      onClick={() => navigate("/profile")}
-                    >
+                }}
+                onClick={() => navigate("/profile")}
+              >
                       <Box sx={{ position: "relative" }}>
-                        <CardMedia
-                          component="img"
+                <CardMedia
+                  component="img"
                           height="200"
-                          image={`http://localhost:8000${item.image}`}
-                          alt={item.title}
-                          sx={{ objectFit: "cover" }}
-                        />
+                  image={`http://localhost:8000${item.image}`}
+                  alt={item.title}
+                  sx={{ objectFit: "cover" }}
+                />
                         <IconButton
                           sx={{
                             position: "absolute",
@@ -401,12 +401,12 @@ function Dashboard() {
                           }}
                         />
                       </Box>
-                      <CardContent>
+                <CardContent>
                         <Typography variant="h6" component="h3" fontWeight="bold" sx={{ mb: 1 }}>
-                          {item.title}
-                        </Typography>
+                    {item.title}
+                  </Typography>
 
-                        <ExpandableText text={item.description} maxLength={100} />
+                  <ExpandableText text={item.description} maxLength={100} />
 
                         <Box
                           sx={{
@@ -418,8 +418,8 @@ function Dashboard() {
                           }}
                         >
                           <Typography variant="h5" color="primary" fontWeight="bold">
-                            ${item.price}
-                          </Typography>
+                    ${item.price}
+                  </Typography>
                           <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
                             <Star sx={{ color: "#FFD700", fontSize: 16 }} />
                             <Typography variant="body2" fontWeight="bold">
@@ -468,11 +468,11 @@ function Dashboard() {
                         >
                           Add to Cart
                         </Button>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                ))}
-          </Grid>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
 
           {/* No Results */}
           {!loading && filteredAndSortedItems.length === 0 && (

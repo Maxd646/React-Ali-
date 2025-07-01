@@ -25,21 +25,20 @@ export default styled(Drawer)(({ theme, ownerState }) => {
   const { lg } = boxShadows;
   const { pxToRem } = functions;
 
-  // drawer styles when openConfigurator={true}
+  // Always anchor to the right
   const drawerOpenStyles = () => ({
     width: configuratorWidth,
-    left: "initial",
     right: 0,
+    left: 'auto',
     transition: transitions.create("right", {
       easing: transitions.easing.sharp,
       duration: transitions.duration.short,
     }),
   });
 
-  // drawer styles when openConfigurator={false}
   const drawerCloseStyles = () => ({
-    left: "initial",
     right: pxToRem(-350),
+    left: 'auto',
     transition: transitions.create("all", {
       easing: transitions.easing.sharp,
       duration: transitions.duration.short,

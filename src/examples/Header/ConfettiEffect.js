@@ -83,4 +83,4 @@ const ConfettiEffect = ({ isActive = false }) => {
   );
 };
 
-export default ConfettiEffect; 
+export default ConfettiEffect;

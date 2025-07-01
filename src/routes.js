@@ -1,11 +1,12 @@
 // Material Dashboard 2 React layouts
 import Home from "layouts/Home";
-import Tables from "layouts/tables";
-import Billing from "layouts/billing";
-import RTL from "layouts/rtl";
-import Notifications from "layouts/notifications";
-import Profile from "layouts/profile";
+import Food from "layouts/tables";
+import Electronics from "layouts/billing";
+import HomeFurniture from "layouts/rtl";
+import Academic from "layouts/notifications";
+import Fashion from "layouts/profile";
 import Cart from "layouts/cart";
+import OrdersOverview from './layouts/Home/components/OrdersOverview';
 
 import Icon from "@mui/material/Icon";
 import Login from "layouts/auth/Login";
@@ -24,42 +25,42 @@ const routes = [
   {
     type: "collapse",
     name: "Food Items",
-    key: "tables",
-    icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/tables",
-    component: <Tables />,
+    key: "food",
+    icon: <Icon fontSize="small">restaurant</Icon>,
+    route: "/food",
+    component: <Food />,
   },
   {
     type: "collapse",
-    name: "Electronics device",
-    key: "billing",
-    icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/billing",
-    component: <Billing />,
+    name: "Electronics Devices",
+    key: "electronics",
+    icon: <Icon fontSize="small">devices</Icon>,
+    route: "/electronics",
+    component: <Electronics />,
   },
   {
     type: "collapse",
-    name: "Books",
-    key: "rtl",
-    icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
-    route: "/rtl",
-    component: <RTL />,
+    name: "Home & Furniture",
+    key: "home-furniture",
+    icon: <Icon fontSize="small">weekend</Icon>,
+    route: "/home-furniture",
+    component: <HomeFurniture />,
   },
   {
     type: "collapse",
-    name: "Academics materials",
-    key: "notifications",
-    icon: <Icon fontSize="small">notifications</Icon>,
-    route: "/notifications",
-    component: <Notifications />,
+    name: "Academic Materials",
+    key: "academic",
+    icon: <Icon fontSize="small">school</Icon>,
+    route: "/academic",
+    component: <Academic />,
   },
   {
     type: "collapse",
-    name: "cloth",
-    key: "profile",
-    icon: <Icon fontSize="small">person</Icon>,
-    route: "/profile",
-    component: <Profile />,
+    name: "Fashion & Clothing",
+    key: "fashion",
+    icon: <Icon fontSize="small">checkroom</Icon>,
+    route: "/fashion",
+    component: <Fashion />,
   },
   {
     type: "route",
@@ -88,6 +89,10 @@ const routes = [
     key: "logout",
     route: "/logout",
     component: <Logout />,
+  },
+  {
+    path: '/orders',
+    element: <OrdersOverview />,
   },
 ];
 

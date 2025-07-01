@@ -164,7 +164,7 @@ const Footer2 = () => {
                   { icon: <YouTube />, href: "#" },
                 ].map((social, index) => (
                   <IconButton
-                    key={index}
+              key={index}
                     sx={{
                       color: "white",
                       bgcolor: "rgba(255,255,255,0.1)",
