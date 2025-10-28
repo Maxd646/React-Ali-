@@ -137,11 +137,5 @@ We are building Africa’s next tech giant. Join the journey:
 
 This project is open-source under the **MIT License**.
 
----
-
-## 🌟 Why Ali መ Fennix is Unique
-
-Ali መ Fennix is more than code — it’s a vision for the future of African commerce.
-We are **building a platform that empowers local businesses**, connects them with global markets, and brings world-class technology to the fingertips of African consumers.
 
 ✨ **Together, we’re creating Africa’s e-commerce revolution.**
